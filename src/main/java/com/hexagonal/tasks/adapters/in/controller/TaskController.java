@@ -6,8 +6,12 @@ import com.hexagonal.tasks.adapters.in.controller.response.TaskResponse;
 import com.hexagonal.tasks.application.domain.Task;
 import com.hexagonal.tasks.application.ports.in.CreateTaskInputPort;
 import com.hexagonal.tasks.application.ports.in.FinishTaskInputPort;
+import com.hexagonal.tasks.application.ports.in.ListPendingTasksInputPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1")
@@ -15,11 +19,13 @@ public class TaskController {
 
     private final CreateTaskInputPort createTaskInputPort;
     private final FinishTaskInputPort finishTaskInputPort;
+    private final ListPendingTasksInputPort listPendingTasksInputPort;
     private final TaskRestMapper mapper;
 
-    public TaskController(CreateTaskInputPort createTaskInputPort, FinishTaskInputPort finishTaskInputPort, TaskRestMapper mapper) {
+    public TaskController(CreateTaskInputPort createTaskInputPort, FinishTaskInputPort finishTaskInputPort, ListPendingTasksInputPort listPendingTasksInputPort, TaskRestMapper mapper) {
         this.createTaskInputPort = createTaskInputPort;
         this.finishTaskInputPort = finishTaskInputPort;
+        this.listPendingTasksInputPort = listPendingTasksInputPort;
         this.mapper = mapper;
     }
 
@@ -38,4 +44,15 @@ public class TaskController {
         finishTaskInputPort.finalizar(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping
+    public ResponseEntity<List<TaskResponse>> listarPendingTasks() {
+        List<Task> tasks = listPendingTasksInputPort.findPendingTasks();
+        var response = tasks.stream()
+                .map(mapper::domainToResponse)
+                .collect(Collectors.toUnmodifiableList());
+        return ResponseEntity.ok(response);
+
+    }
+
 }

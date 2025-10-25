@@ -17,4 +17,7 @@ public interface TaskRestMapper {
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "completedAt", ignore = true)
     Task toDomain(TaskRequest request);
+
+    @Mapping(target = "savedAt", source = "completedAt")
+    TaskResponse domainToResponse(Task task);
 }
