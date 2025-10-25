@@ -5,7 +5,7 @@ import com.hexagonal.tasks.application.domain.Task;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface TaskAMQPMapper {
 
     @Mapping(target = "id", ignore = true)

@@ -23,8 +23,8 @@ spring:
     password: guest
     listener:
       simple:
-        concurrency: 3       # número mínimo de consumidores concorrentes
-        max-concurrency: 10  # número máximo de consumidores concorrentes
+        concurrency: 3
+        max-concurrency: 10
         prefetch: 5
 
   application:

@@ -14,7 +14,7 @@ public class CreateTaskConsumer {
     private final CreateTaskInputPort createTaskInputPort;
     private final TaskAMQPMapper mapper;
 
-    public CreateTaskConsumer(CreateTaskInputPort createTaskAMQPInputPort, CreateTaskInputPort createTaskInputPort, TaskAMQPMapper mapper) {
+    public CreateTaskConsumer(CreateTaskInputPort createTaskInputPort, TaskAMQPMapper mapper) {
         this.createTaskInputPort = createTaskInputPort;
         this.mapper = mapper;
     }
