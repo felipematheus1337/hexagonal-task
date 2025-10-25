@@ -16,6 +16,16 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        concurrency: 3       # número mínimo de consumidores concorrentes
+        max-concurrency: 10  # número máximo de consumidores concorrentes
+        prefetch: 5
 
   application:
    name: task-hexagonal
