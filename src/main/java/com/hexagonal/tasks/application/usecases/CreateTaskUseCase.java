@@ -2,11 +2,12 @@ package com.hexagonal.tasks.application.usecases;
 
 import com.hexagonal.tasks.application.domain.Task;
 import com.hexagonal.tasks.application.domain.enums.TaskStatus;
+import com.hexagonal.tasks.application.ports.in.CreateTaskInputPort;
 import com.hexagonal.tasks.application.ports.out.CreateTaskOutputPort;
 
 import java.time.LocalDate;
 
-public class CreateTaskUseCase {
+public class CreateTaskUseCase implements CreateTaskInputPort {
 
     private final CreateTaskOutputPort createTaskOutputPort;
 
@@ -14,6 +15,7 @@ public class CreateTaskUseCase {
         this.createTaskOutputPort = createTaskOutputPort;
     }
 
+    @Override
     public void create(Task task) {
         task.setStatus(TaskStatus.PENDING);
         task.setCreatedAt(LocalDate.now());
