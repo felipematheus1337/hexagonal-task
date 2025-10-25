@@ -23,7 +23,7 @@ public class TaskController {
         this.mapper = mapper;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<TaskResponse> criarTask(@RequestBody TaskRequest request) {
 
         Task task = mapper.toDomain(request);
