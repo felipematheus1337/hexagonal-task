@@ -8,4 +8,6 @@ import org.mapstruct.Mapper;
 public interface TaskEntityMapper {
 
     TaskEntity toEntity(Task task);
+
+    Task toDomain(TaskEntity entity);
 }
