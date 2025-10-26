@@ -13,5 +13,5 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<TaskEntity, Long> {
 
     @Query("SELECT t FROM TaskEntity t WHERE t.status = :status")
-    List<TaskEntity> findPendingTasks(@Param("status") TaskEntityStatus status);
+    List<TaskEntity> findTasksByStatus(@Param("status") TaskEntityStatus status);
 }

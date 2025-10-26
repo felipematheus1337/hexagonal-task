@@ -1,11 +1,9 @@
 package com.hexagonal.tasks.config;
 
-import com.hexagonal.tasks.adapters.out.CreateTaskAdapter;
-import com.hexagonal.tasks.adapters.out.FindTaskByIdAdapter;
-import com.hexagonal.tasks.adapters.out.FinishTaskAdapter;
-import com.hexagonal.tasks.adapters.out.ListPendingTasksAdapter;
+import com.hexagonal.tasks.adapters.out.*;
 import com.hexagonal.tasks.application.usecases.CreateTaskUseCase;
 import com.hexagonal.tasks.application.usecases.FinishTaskUseCase;
+import com.hexagonal.tasks.application.usecases.ListCompletedTasksUseCase;
 import com.hexagonal.tasks.application.usecases.ListPendingTasksUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,5 +24,10 @@ public class ApplicationConfigurationBeans {
     @Bean
     public ListPendingTasksUseCase listPendingTasksUseCase(ListPendingTasksAdapter adapter) {
         return new ListPendingTasksUseCase(adapter);
+    }
+
+    @Bean
+    public ListCompletedTasksUseCase listCompletedTasksUseCase(ListCompleteTasksAdapter adapter) {
+        return new ListCompletedTasksUseCase(adapter);
     }
 }
